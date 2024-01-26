@@ -24,10 +24,24 @@ function displayLibrary() {
 		bookCard.classList.add('card');
 
 		const title = document.createElement('h2');
-		title.innerText = book.title;
+		title.textContent = book.title;
+
+		const author = document.createElement('p');
+		author.textContent = `By ${book.author}`;
+
+		const pages = document.createElement('p');
+		pages.textContent = `Pages: ${book.pages}`;
+
+		const read = document.createElement('p');
+		read.textContent = `Read: ${read ? 'Yes' : 'No'}`;
+
+		bookCard.appendChild(title);
+		bookCard.appendChild(author);
+		bookCard.appendChild(pages);
+		bookCard.appendChild(read);
+
+		main.appendChild(bookCard);
 	});
 }
 
-const theHobbit = new Book('The Hobbit ', 'J.R.R Tolkien', 295, false);
-
-console.log(theHobbit.info());
+displayLibrary();
