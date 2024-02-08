@@ -4,6 +4,7 @@ const library = [
 	new Book('100 years of solitude', 'gabriel garcia marquez', 417, false),
 ];
 
+// Book constructor
 function Book(title, author, pages, read = false) {
 	this.title = title;
 	this.author = author;
@@ -17,7 +18,7 @@ function Book(title, author, pages, read = false) {
 function addToLibrary() {}
 
 function displayLibrary() {
-	const main = document.querySelector('main');
+	const bookDiv = document.querySelector('.book-div');
 
 	library.forEach((book) => {
 		const bookCard = document.createElement('div');
@@ -40,8 +41,22 @@ function displayLibrary() {
 		bookCard.appendChild(pages);
 		bookCard.appendChild(read);
 
-		main.appendChild(bookCard);
+		bookDiv.appendChild(bookCard);
 	});
 }
 
+const dialog = document.querySelector('dialog');
+const showDialogBtn = document.querySelector('#show-dialog');
+const formSubmitBtn = document.querySelector('#submitBtn');
+
+showDialogBtn.addEventListener('click', (e) => {
+	dialog.showModal();
+});
+
+dialog.addEventListener('close', (e) => {
+	console.log('closing modal!');
+	console.log(dialog.returnValue);
+});
+
 displayLibrary();
+console.log('hey there heh');
