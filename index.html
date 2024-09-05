@@ -9,22 +9,24 @@
 	<body>
 		<h1>My Library:</h1>
 		<main>
-			<dialog method="dialog">
-				<form>
+			<dialog>
+				<form id="form">
 					<label for="title">Title:</label>
-					<input type="text" name="book-title" id="title" required autofocus />
+					<input type="text" name="book-title" id="title" />
 
 					<label for="author">Author:</label>
-					<input type="text" name="book-author" id="author" required />
+					<input type="text" name="book-author" id="author" />
 
 					<label for="pages">Pages:</label>
-					<input type="number" name="book-pages" id="pages" required />
+					<input type="number" name="book-pages" id="pages" />
 
 					<label for="read">Read:</label>
 					<input type="checkbox" name="book-read" id="read" />
 
-					<button id="cancel-btn" formnovalidate>Cancel</button>
-					<button id="submitBtn">Submit</button>
+					<button type="submit" id="submitBtn">Submit</button>
+					<button id="cancelBtn" formmethod="dialog">Cancel</button>
+
+					<span id="errorText"></span>
 				</form>
 			</dialog>
 			<button id="show-dialog">Add Book</button>

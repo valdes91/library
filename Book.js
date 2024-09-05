@@ -1,9 +1,3 @@
-const library = [
-	new Book('the hobbit', 'jrr tolkien', 295, false),
-	new Book('the road', 'cormac mccarthy', 412, true),
-	new Book('100 years of solitude', 'gabriel garcia marquez', 417, false),
-];
-
 // Book constructor
 function Book(title, author, pages, read = false) {
 	this.title = title;
@@ -15,10 +9,33 @@ function Book(title, author, pages, read = false) {
 	};
 }
 
-function addToLibrary() {}
+const library = [
+	new Book('the hobbit', 'jrr tolkien', 295, false),
+	new Book('the road', 'cormac mccarthy', 412, true),
+	new Book('100 years of solitude', 'gabriel garcia marquez', 417, false),
+];
+
+const dialog = document.querySelector('dialog');
+const form = document.querySelector('#form');
+const showDialogBtn = document.querySelector('#show-dialog');
+const formSubmitBtn = document.querySelector('#submitBtn');
+const titleInput = document.querySelector('#title');
+const authorInput = document.querySelector('#author');
+const pagesInput = document.querySelector('#pages');
+const readInput = document.querySelector('#read');
+
+function addToLibrary() {
+	const title = titleInput.value;
+	const pages = pagesInput.value;
+	const author = authorInput.value;
+	const read = readInput.checked;
+	const newBook = new Book(title, author, pages, read);
+	library.push(newBook);
+}
 
 function displayLibrary() {
 	const bookDiv = document.querySelector('.book-div');
+	bookDiv.textContent = '';
 
 	library.forEach((book) => {
 		const bookCard = document.createElement('div');
@@ -34,7 +51,7 @@ function displayLibrary() {
 		pages.textContent = `Pages: ${book.pages}`;
 
 		const read = document.createElement('p');
-		read.textContent = `Read: ${read ? 'Yes' : 'No'}`;
+		read.textContent = `Read: ${book.read ? 'Yes' : 'No'}`;
 
 		bookCard.appendChild(title);
 		bookCard.appendChild(author);
@@ -45,9 +62,19 @@ function displayLibrary() {
 	});
 }
 
-const dialog = document.querySelector('dialog');
-const showDialogBtn = document.querySelector('#show-dialog');
-const formSubmitBtn = document.querySelector('#submitBtn');
+function validateInput() {
+	const titleFilled = titleInput.value.length > 0;
+	const pagesFilled = pagesInput.value !== '';
+	const authorFilled = authorInput.value.length > 0;
+	return titleFilled && pagesFilled && authorFilled;
+}
+
+function clearForm() {
+	titleInput.value = '';
+	pagesInput.value = '';
+	authorInput.value = '';
+	readInput.checked = false;
+}
 
 showDialogBtn.addEventListener('click', (e) => {
 	dialog.showModal();
@@ -58,5 +85,24 @@ dialog.addEventListener('close', (e) => {
 	console.log(dialog.returnValue);
 });
 
+formSubmitBtn.addEventListener('click', (e) => {
+	e.preventDefault();
+	if (validateInput()) {
+		addToLibrary();
+		displayLibrary();
+		clearForm();
+		dialog.close();
+	} else {
+		console.log('fill out the form, coward');
+		const errorText = document.querySelector('#errorText');
+		errorText.textContent = '';
+		errorText.textContent = 'Please fill out all fields';
+		form.appendChild(errorText);
+	}
+});
+
+form.addEventListener('submit', (e) => {
+	console.log('submit event handler engaged');
+});
 displayLibrary();
 console.log('hey there heh');
