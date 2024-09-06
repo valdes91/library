@@ -9,6 +9,10 @@ function Book(title, author, pages, read = false) {
 	};
 }
 
+Book.prototype.toggleRead = function () {
+	this.read = !this.read;
+};
+
 const library = [
 	new Book('the hobbit', 'jrr tolkien', 295, false),
 	new Book('the road', 'cormac mccarthy', 412, true),
@@ -42,7 +46,7 @@ function removeBook(e) {
 
 function changeReadStatus(e) {
 	const bookIndex = e.target.getAttribute('data-index');
-	library[bookIndex].read = !library[bookIndex].read;
+	library[bookIndex].toggleRead();
 	displayLibrary();
 }
 
