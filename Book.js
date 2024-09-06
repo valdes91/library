@@ -33,11 +33,17 @@ function addToLibrary() {
 	library.push(newBook);
 }
 
+function removeBook(e) {
+	const bookIndex = e.target.getAttribute('data-index');
+	library.splice(bookIndex, 1);
+	displayLibrary();
+}
+
 function displayLibrary() {
 	const bookDiv = document.querySelector('.book-div');
 	bookDiv.textContent = '';
 
-	library.forEach((book) => {
+	library.forEach((book, index) => {
 		const bookCard = document.createElement('div');
 		bookCard.classList.add('card');
 
@@ -53,10 +59,16 @@ function displayLibrary() {
 		const read = document.createElement('p');
 		read.textContent = `Read: ${book.read ? 'Yes' : 'No'}`;
 
+		const removeButton = document.createElement('button');
+		removeButton.setAttribute('data-index', index);
+		removeButton.appendChild(document.createTextNode('Remove Book'));
+		removeButton.addEventListener('click', removeBook);
+
 		bookCard.appendChild(title);
 		bookCard.appendChild(author);
 		bookCard.appendChild(pages);
 		bookCard.appendChild(read);
+		bookCard.appendChild(removeButton);
 
 		bookDiv.appendChild(bookCard);
 	});
