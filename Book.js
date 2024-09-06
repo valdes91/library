@@ -34,8 +34,15 @@ function addToLibrary() {
 }
 
 function removeBook(e) {
+	console.log(e.target);
 	const bookIndex = e.target.getAttribute('data-index');
 	library.splice(bookIndex, 1);
+	displayLibrary();
+}
+
+function changeReadStatus(e) {
+	const bookIndex = e.target.getAttribute('data-index');
+	library[bookIndex].read = !library[bookIndex].read;
 	displayLibrary();
 }
 
@@ -56,8 +63,14 @@ function displayLibrary() {
 		const pages = document.createElement('p');
 		pages.textContent = `Pages: ${book.pages}`;
 
-		const read = document.createElement('p');
-		read.textContent = `Read: ${book.read ? 'Yes' : 'No'}`;
+		const readCheckbox = document.createElement('input');
+		readCheckbox.type = 'checkbox';
+		readCheckbox.setAttribute('data-index', index);
+		readCheckbox.addEventListener('click', changeReadStatus);
+		readCheckbox.checked = book.read ? true : false;
+
+		const readStatus = document.createElement('span');
+		readStatus.textContent = `Read: ${book.read ? 'Yes' : 'No'}`;
 
 		const removeButton = document.createElement('button');
 		removeButton.setAttribute('data-index', index);
@@ -67,7 +80,8 @@ function displayLibrary() {
 		bookCard.appendChild(title);
 		bookCard.appendChild(author);
 		bookCard.appendChild(pages);
-		bookCard.appendChild(read);
+		bookCard.appendChild(readCheckbox);
+		bookCard.appendChild(readStatus);
 		bookCard.appendChild(removeButton);
 
 		bookDiv.appendChild(bookCard);
