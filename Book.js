@@ -9,6 +9,7 @@ function Book(title, author, pages, read = false) {
 	};
 }
 
+// same functionality for any book, better to store it in prototype instead of every Book object created
 Book.prototype.toggleRead = function () {
 	this.read = !this.read;
 };
@@ -23,10 +24,12 @@ const dialog = document.querySelector('dialog');
 const form = document.querySelector('#form');
 const showDialogBtn = document.querySelector('#show-dialog');
 const formSubmitBtn = document.querySelector('#submitBtn');
+const formCancelBtn = document.querySelector('#cancelBtn');
 const titleInput = document.querySelector('#title');
 const authorInput = document.querySelector('#author');
 const pagesInput = document.querySelector('#pages');
 const readInput = document.querySelector('#read');
+const errorText = document.querySelector('#errorText');
 
 function addToLibrary() {
 	const title = titleInput.value;
@@ -103,6 +106,7 @@ function clearForm() {
 	titleInput.value = '';
 	pagesInput.value = '';
 	authorInput.value = '';
+	errorText.textContent = '';
 	readInput.checked = false;
 }
 
@@ -111,28 +115,18 @@ showDialogBtn.addEventListener('click', (e) => {
 });
 
 dialog.addEventListener('close', (e) => {
-	console.log('closing modal!');
-	console.log(dialog.returnValue);
-});
-
-formSubmitBtn.addEventListener('click', (e) => {
-	e.preventDefault();
-	if (validateInput()) {
-		addToLibrary();
-		displayLibrary();
+	if (dialog.returnValue === 'submit') {
+		if (validateInput()) {
+			addToLibrary();
+			displayLibrary();
+			clearForm();
+		} else {
+			errorText.textContent = 'Please fill out all fields';
+			dialog.showModal();
+		}
+	} else if (dialog.returnValue === 'cancel') {
 		clearForm();
-		dialog.close();
-	} else {
-		console.log('fill out the form, coward');
-		const errorText = document.querySelector('#errorText');
-		errorText.textContent = '';
-		errorText.textContent = 'Please fill out all fields';
-		form.appendChild(errorText);
 	}
 });
 
-form.addEventListener('submit', (e) => {
-	console.log('submit event handler engaged');
-});
 displayLibrary();
-console.log('hey there heh');

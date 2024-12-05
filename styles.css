@@ -1,0 +1,56 @@
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	border: 1px solid black;
+	font-family: 'Roboto', sans-serif;
+}
+
+.flex {
+	display: flex;
+}
+
+.grid {
+	display: grid;
+}
+
+:root {
+	--color-primary: #f5efe6;
+	--color-secondary: #e8dfca;
+	--color-third: #aebdca;
+	--color-highlight: hsl(210, 27%, 58%);
+}
+
+.px-1 {
+	padding: 0 1.25rem;
+}
+
+.py-1 {
+	padding: 1.5rem 0;
+}
+
+html {
+	height: 100%;
+}
+
+header {
+	justify-content: flex-start;
+	gap: 1rem;
+}
+
+body {
+	min-height: 100%;
+}
+
+body > * {
+	padding-left: 12rem;
+	padding-right: 12rem;
+}
+
+/* .book-div {
+} */
