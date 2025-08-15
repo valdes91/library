@@ -15,6 +15,10 @@
 	display: flex;
 }
 
+.column {
+	flex-direction: column;
+}
+
 .grid {
 	display: grid;
 }
@@ -39,11 +43,13 @@ html {
 }
 
 header {
-	justify-content: flex-start;
-	gap: 1rem;
+	justify-content: center;
+	padding: 1rem;
 }
 
-body {
+body,
+main,
+.book-div {
 	min-height: 100%;
 }
 
@@ -52,5 +58,20 @@ body > * {
 	padding-right: 12rem;
 }
 
-/* .book-div {
-} */
+dialog {
+	margin: auto;
+}
+
+#show-dialog {
+	width: fit-content;
+	align-self: center;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	padding: 0.25rem 0.75rem;
+}
+
+.book-div {
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(275px, max-content));
+	justify-content: center;
+}

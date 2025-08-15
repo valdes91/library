@@ -84,12 +84,16 @@ function displayLibrary() {
 		removeButton.appendChild(document.createTextNode('Remove Book'));
 		removeButton.addEventListener('click', removeBook);
 
+		const readControlDiv = document.createElement('div');
+		readControlDiv.appendChild(readCheckbox);
+		readControlDiv.appendChild(readStatus);
+		readControlDiv.appendChild(removeButton);
+		readControlDiv.classList.add('read-control');
+
 		bookCard.appendChild(title);
 		bookCard.appendChild(author);
 		bookCard.appendChild(pages);
-		bookCard.appendChild(readCheckbox);
-		bookCard.appendChild(readStatus);
-		bookCard.appendChild(removeButton);
+		bookCard.appendChild(readControlDiv);
 
 		bookDiv.appendChild(bookCard);
 	});

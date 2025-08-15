@@ -9,30 +9,40 @@
 	<body>
 		<header class="flex">
 			<h1>My Library</h1>
+		</header>
+		<main class="flex column">
+			<button id="show-dialog">Add Book</button>
+			<div class="book-div grid"></div>
 			<dialog>
-				<form id="form" method="dialog">
-					<label for="title">Title:</label>
-					<input type="text" name="book-title" id="title" />
+				<form class="flex column" id="form" method="dialog">
+					<div>
+						<label for="title">Title:</label>
+						<input type="text" name="book-title" id="title" />
+					</div>
 
-					<label for="author">Author:</label>
-					<input type="text" name="book-author" id="author" />
+					<div>
+						<label for="author">Author:</label>
+						<input type="text" name="book-author" id="author" />
+					</div>
 
-					<label for="pages">Pages:</label>
-					<input type="number" name="book-pages" id="pages" />
+					<div>
+						<label for="pages">Pages:</label>
+						<input type="number" name="book-pages" id="pages" />
+					</div>
 
-					<label for="read">Read:</label>
-					<input type="checkbox" name="book-read" id="read" />
+					<div>
+						<label for="read">Read:</label>
+						<input type="checkbox" name="book-read" id="read" />
+					</div>
 
-					<button type="submit" id="submitBtn" value="submit">Submit</button>
-					<button id="cancelBtn" value="cancel">Cancel</button>
+					<div>
+						<button type="submit" id="submitBtn" value="submit">Submit</button>
+						<button id="cancelBtn" value="cancel">Cancel</button>
+					</div>
 
 					<span id="errorText"></span>
 				</form>
 			</dialog>
-			<button id="show-dialog">Add Book</button>
-		</header>
-		<main>
-			<div class="book-div grid"></div>
 		</main>
 	</body>
 	<script src="./Book.js"></script>
