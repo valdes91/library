@@ -1,18 +1,37 @@
-// Book constructor
-function Book(title, author, pages, read = false) {
-	this.title = title;
-	this.author = author;
-	this.pages = pages;
-	this.read = read;
-	this.info = () => {
-		return `${title} by ${author}, ${pages} pages, ${read ? ' has been read' : ' not read yet'}`;
-	};
-}
+// // Book constructor
+// function Book(title, author, pages, read = false) {
+// 	this.title = title;
+// 	this.author = author;
+// 	this.pages = pages;
+// 	this.read = read;
+// 	this.info = () => {
+// 		return `${title} by ${author}, ${pages} pages, ${read ? ' has been read' : ' not read yet'}`;
+// 	};
+// }
 
-// same functionality for any book, better to store it in prototype instead of every Book object created
-Book.prototype.toggleRead = function () {
-	this.read = !this.read;
-};
+// // same functionality for any book, better to store it in prototype instead of every Book object created
+// Book.prototype.toggleRead = function () {
+// 	this.read = !this.read;
+// };
+
+class Book {
+	constructor(title, author, pages, read = false) {
+		this.title = title;
+		this.author = author;
+		this.pages = pages;
+		this.read = read;
+	}
+
+	info() {
+		return `${this.title} by ${this.author}, ${this.pages} pages, ${
+			this.read ? ' has been read' : ' not read yet'
+		}`;
+	}
+
+	toggleRead() {
+		this.read = !this.read;
+	}
+}
 
 const library = [
 	new Book('the hobbit', 'jrr tolkien', 295, false),
